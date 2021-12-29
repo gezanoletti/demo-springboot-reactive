@@ -1,0 +1,16 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://postgres@localhost:5432/postgres
+    username: postgres
+    password: changeme
+  rabbitmq:
+    username: user
+    password: bitnami
+
+logging:
+  level:
+    org:
+      springframework:
+        data.r2dbc: DEBUG
+        r2dbc: DEBUG
+    io.r2dbc: DEBUG
