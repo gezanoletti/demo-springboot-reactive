@@ -9,6 +9,7 @@ import reactor.test.StepVerifier;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class EmployeeRepositoryIntegrationTest
@@ -78,6 +79,17 @@ class EmployeeRepositoryIntegrationTest
         employeeRepository.findAll()
             .collectList()
             .subscribe(employee -> employee.forEach(Assertions::assertNotNull));
+    }
+
+
+    @Test
+    void testFindAllBlocking()
+    {
+        final var employees = employeeRepository.findAll()
+            .collectList()
+            .block();
+        assertNotNull(employees);
+        assertTrue(employees.size() > 0);
     }
 
 

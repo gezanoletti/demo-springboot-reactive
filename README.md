@@ -2,7 +2,7 @@
 
 - Basic CRUD operations
 - Exception handling
-- Integration test with TestContainers/Playtika
+- Integration test with Playtika Testcontainers
 - Stream
 - Functional endpoints
 - Call another service

@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @SpringBootTest
@@ -131,11 +132,16 @@ public class EmployeeControllerIntegrationTest
     @Test
     void deleteEmployee()
     {
-        final var employeeId = 11;
+        final var employee = Employee.builder()
+            .firstName(fakeValuesService.letterify("?????"))
+            .lastName(fakeValuesService.letterify("?????"))
+            .build();
+        final var employeeSaved = employeeRepository.save(employee).block();
 
+        assertNotNull(employeeSaved);
         webTestClient
             .delete()
-            .uri(EMPLOYEE_ID_ENDPOINT, employeeId)
+            .uri(EMPLOYEE_ID_ENDPOINT, employeeSaved.getId())
             .accept(APPLICATION_JSON)
             .exchange()
             .expectStatus().isOk();

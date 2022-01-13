@@ -1,0 +1,3 @@
+embedded:
+  rabbitmq.dockerImage: 'rabbitmq:3-management'
+  postgresql.dockerImage: 'postgres:12-alpine'
