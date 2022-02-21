@@ -1,4 +1,4 @@
-package com.gezanoletti.demospringbootreactive.config;
+package com.gezanoletti.demospringbootreactive.setup;
 
 import io.r2dbc.spi.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;

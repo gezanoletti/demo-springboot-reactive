@@ -22,4 +22,14 @@ public class EmployeeMapper
             .lastName(employeeCreateDto.getLastName())
             .build();
     }
+
+
+    public EmployeeCreateEvent mapToEvent(final Employee employee)
+    {
+        return EmployeeCreateEvent.builder()
+            .id(employee.getId())
+            .firstName(employee.getFirstName())
+            .lastName(employee.getLastName())
+            .build();
+    }
 }
