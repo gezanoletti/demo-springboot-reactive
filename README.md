@@ -9,3 +9,4 @@
 - RabbitMQ
 - R2DBC relations (one-to-one, one-to-many, etc.)
 - Spring security
+- Detect blocking calls with [BlockHound](https://github.com/reactor/BlockHound)
