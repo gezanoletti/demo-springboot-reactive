@@ -2,7 +2,6 @@ package com.gezanoletti.demospringbootreactive.people;
 
 import com.gezanoletti.demospringbootreactive.error.NotFoundEntityException;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,7 @@ import reactor.core.publisher.Mono;
 public class DefaultPeopleService implements PeopleService
 {
     private final EmployeeRepository employeeRepository;
+    private final EmployeeEventSender employeeEventSender;
 
 
     @Override
@@ -47,7 +47,8 @@ public class DefaultPeopleService implements PeopleService
             .build();
 
         return employeeRepository.save(employee)
-            .doOnNext(savedEmployee -> log.info("Employee {} saved successfully", savedEmployee.getId()));
+            .doOnNext(savedEmployee -> log.info("Employee {} saved successfully", savedEmployee.getId()))
+            .doOnNext(savedEmployee -> employeeEventSender.sendOnCreateEmployee(EmployeeMapper.mapToEvent(savedEmployee)));
     }
 
 
